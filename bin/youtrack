@@ -1,0 +1,30 @@
+#!/bin/sh
+BASE="$( cd $(dirname $0) ; pwd -P )/.."
+
+JAVA_HOME=$BASE/jdk1.7.0_51
+CATALINA_HOME=$BASE/apache-tomcat-7.0.50
+CATALINA_OPTS="-XX:MaxPermSize=200M"
+
+export CATALINA_HOME
+export CATALINA_OPTS
+export JAVA_HOME
+
+case "$1" in
+ start)
+        if [ -f $CATALINA_HOME/bin/startup.sh ];
+          then
+	    $CATALINA_HOME/bin/startup.sh
+        fi
+	;;
+ stop)
+        if [ -f $CATALINA_HOME/bin/shutdown.sh ];
+          then
+	    $CATALINA_HOME/bin/shutdown.sh
+        fi
+ 	;;
+ *)
+ 	echo $"Usage: $0 {start|stop}"
+	exit 1
+	;;
+esac
+

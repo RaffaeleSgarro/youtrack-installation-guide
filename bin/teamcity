@@ -1,0 +1,28 @@
+#!/bin/sh
+BASE="$( cd $(dirname $0) ; pwd -P )/.."
+
+JAVA_HOME=$BASE/jdk1.7.0_51
+TEAM_CITY_HOME=$BASE/TeamCity
+COMMAND=$TEAM_CITY_HOME/bin/runAll.sh
+
+export JAVA_HOME
+
+case "$1" in
+ start)
+        if [ -f $COMMAND ];
+          then
+	    $COMMAND start
+        fi
+	;;
+ stop)
+        if [ -f $COMMAND ];
+          then
+	    $COMMAND stop
+        fi
+ 	;;
+ *)
+ 	echo $"Usage: $0 {start|stop}"
+	exit 1
+	;;
+esac
+

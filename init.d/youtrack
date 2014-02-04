@@ -1,0 +1,48 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          youtrack
+# Required-Start:
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Issue tracker YouTrack
+# Description:       Issue tracker YouTrack
+### END INIT INFO
+USER="raffaele"
+ISSUES_HOME="/home/raffaele/issues"
+SERVICE_NAME="youtrack"
+
+# Load the VERBOSE setting and other rcS variables
+. /lib/init/vars.sh
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.2-14) to ensure that this file is present
+# and status_of_proc is working.
+. /lib/lsb/init-functions
+
+RETVAL=$?
+SERVICE="$ISSUES_HOME/bin/$SERVICE_NAME"
+
+case "$1" in
+ start)
+        if [ -f $SERVICE ];
+          then
+	    echo "Starting $SERVICE_NAME"
+            /bin/su $USER $SERVICE start
+        fi
+	;;
+ stop)
+        if [ -f $SERVICE ];
+          then
+	    echo "Stopping $SERVICE_NAME"
+            /bin/su $USER $SERVICE stop
+        fi
+ 	;;
+ *)
+ 	echo $"Usage: $0 {start|stop}"
+	exit 1
+	;;
+esac
+
+exit $RETVAL
+
