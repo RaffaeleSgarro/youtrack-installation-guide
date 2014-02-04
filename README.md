@@ -1,16 +1,42 @@
 This is the base directory for our issue tracking system, based on YouTrack.
 TeamCity is integrated to allow YouTrack to link to source code changes.
 
+Files
+=====
+I could not put the giant binaries on GitHub. This is what I have in the
+installation directory:
+
+    .
+    ├── apache-tomcat-7.0.50
+    ├── bin
+    ├── init.d
+    ├── jdk1.7.0_51
+    ├── README.md
+    ├── TeamCity
+    └── youtrack
+
+And this is the content of `youtrack`
+
+    youtrack/
+    ├── libs
+    │   ├── jetty-continuation-9.1.1.v20140108.jar
+    │   ├── jetty-http-9.1.1.v20140108.jar
+    │   ├── jetty-io-9.1.1.v20140108.jar
+    │   ├── jetty-servlets-9.1.1.v20140108.jar
+    │   ├── jetty-util-9.1.1.v20140108.jar
+    │   └── log4j-1.2.17.jar
+    └── youtrack.war
+
 Running the embedded programs
 =============================
 You can manually start/stop both YouTrack and TeamCity with the scripts provided
-in bin/:
+in `bin`:
 
     bin/youtrack {start|stop}
     bin/teamcity {start|stop}
 
-There are init scripts for Debian systems in init.d/. You need to copy them to
-the system /etc/init.d, creat symlinks and enabling the service. This is done
+There are init scripts for Debian systems in `init.d`. You need to copy them to
+the system `/etc/init.d`, creat symlinks and enabling the service. This is done
 as root:
 
     su
@@ -33,7 +59,7 @@ YouTrack needs to run in:
 
     CATALINA_OPTS="-XX:MaxPermSize=200M"
 
-Check that Tomcat is up and running by pointing a browser to localhost:8080
+Check that Tomcat is up and running by pointing a browser to `localhost:8080`
 Then it's time to deploy youtrack. I edited tomcat-users.xml to allow
 the user "admin" (password "admin") to log into the applications manager app.
 So point a browser to:
@@ -41,8 +67,8 @@ So point a browser to:
     http://localhost:8080/manager/html
 
 And login with admin:admin. YouTrack requires some libraries, so you need to
-download the jars and put them in $CATALINA_HOME/lib (I copied the jars in
-youtrack/libs):
+download the jars and put them in `$CATALINA_HOME/lib` (I copied the jars in
+`youtrack/libs`):
 
  - log4j
  - jetty-io
@@ -51,8 +77,8 @@ youtrack/libs):
  - jetty-util
  - jetty-http
 
-Then deploy the YouTrack app with the provided manager. I had to disable (-1)
-the max-file-size check, because the YouTrack.war archive is quite big:
+Then deploy the YouTrack app with the provided manager. I had to disable (`-1`)
+the `max-file-size` check, because the YouTrack archive is quite big:
 
     <multipart-config>
       <!-- 50MB max -->
@@ -68,11 +94,11 @@ browser to the YouTrack context path to configure it.
 Installation log: TeamCity
 ==========================
 
-TeamCity is easier to run. You can use the management script in bin/:
+TeamCity is easier to run. You can use the management script in `bin`:
 
     bin/teamcity {start|stop}
     
-TeamCity can be reached at http://localhost:8111
+TeamCity can be reached at `http://localhost:8111`
 
 
 TeamCity and YouTrack integration
