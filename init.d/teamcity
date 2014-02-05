@@ -20,29 +20,5 @@ SERVICE_NAME="teamcity"
 # and status_of_proc is working.
 . /lib/lsb/init-functions
 
-RETVAL=$?
-SERVICE="$ISSUES_HOME/bin/$SERVICE_NAME"
-
-case "$1" in
- start)
-        if [ -f $SERVICE ];
-          then
-	    echo "Starting $SERVICE_NAME"
-            /bin/su $USER $SERVICE start
-        fi
-	;;
- stop)
-        if [ -f $SERVICE ];
-          then
-	    echo "Stopping $SERVICE_NAME"
-            /bin/su $USER $SERVICE stop
-        fi
- 	;;
- *)
- 	echo $"Usage: $0 {start|stop}"
-	exit 1
-	;;
-esac
-
-exit $RETVAL
+/bin/su $USER "$ISSUES_HOME/bin/$SERVICE_NAME" "$1"
 

@@ -8,19 +8,13 @@ COMMAND=$TEAM_CITY_HOME/bin/runAll.sh
 export JAVA_HOME
 
 case "$1" in
- start)
-        if [ -f $COMMAND ];
-          then
-	    $COMMAND start
-        fi
-	;;
- stop)
-        if [ -f $COMMAND ];
-          then
-	    $COMMAND stop
-        fi
- 	;;
- *)
+    start)
+        $COMMAND start
+        ;;
+    stop)
+        $COMMAND stop
+        ;;
+    *)
  	echo $"Usage: $0 {start|stop}"
 	exit 1
 	;;

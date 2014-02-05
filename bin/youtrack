@@ -10,19 +10,13 @@ export CATALINA_OPTS
 export JAVA_HOME
 
 case "$1" in
- start)
-        if [ -f $CATALINA_HOME/bin/startup.sh ];
-          then
-	    $CATALINA_HOME/bin/startup.sh
-        fi
+    start)
+	$CATALINA_HOME/bin/startup.sh
 	;;
- stop)
-        if [ -f $CATALINA_HOME/bin/shutdown.sh ];
-          then
-	    $CATALINA_HOME/bin/shutdown.sh
-        fi
+    stop)
+	$CATALINA_HOME/bin/shutdown.sh
  	;;
- *)
+    *)
  	echo $"Usage: $0 {start|stop}"
 	exit 1
 	;;
